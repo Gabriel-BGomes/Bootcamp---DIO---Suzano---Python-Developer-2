@@ -1,3 +1,5 @@
+#Exemplo sem usar a biblioteca pytz
+
 from datetime import datetime, timedelta, timezone
 
 data_oslo = datetime.now(timezone(timedelta(hours=2)))
