@@ -47,11 +47,14 @@ while True:
 
     if opcao == "d":
         quantidade_deposito = float(input("Digite a quantia que você deseja depositar: "))
-        saldo += quantidade_deposito
-        print(f'Deposito de: R$ {quantidade_deposito:.2f} Realizado com sucesso!')
-        print(f'Novo saldo de: R$ {saldo:.2f}')
-        numero_depositos += 1
-        deposito_total += quantidade_deposito
+        if quantidade_deposito >0:
+            saldo += quantidade_deposito
+            print(f'Deposito de: R$ {quantidade_deposito:.2f} Realizado com sucesso!')
+            print(f'Novo saldo de: R$ {saldo:.2f}')
+            numero_depositos += 1
+            extrato += f'Deposito de: R$ {quantidade_deposito:.2f}\n'
+        else:
+            print("Este valor para depósito não é válido.")
         
     elif opcao == "s":
         if numero_saques < LIMITE_SAQUES:
@@ -60,7 +63,7 @@ while True:
                 if saque_solicitado <= saldo:
                     saldo -= saque_solicitado
                     numero_saques +=  1
-                    saques_total += saque_solicitado
+                    extrato += f'Saque de: R$ {saque_solicitado:.2f}\n'
                     print(f'Foi sacado da sua conta bancária: R$ {saque_solicitado:.2f}')
                     print(f'Novo saldo de: R$ {saldo:.2f}')
                 else:
@@ -72,13 +75,11 @@ while True:
             print("Limite diário atingido")
             
     elif opcao == "e":
-        opcao_extrato = str(input("Você deseja o extrato de depósito ou de saque? use [d] para depósito e [s] para saque: "))
-        if opcao_extrato == "d":
-            print(f'Foram feitos {numero_depositos} depósitos de no total R$ {deposito_total:.2f}')
-        elif opcao_extrato == "s":
-            print(f'Foram feitos {numero_saques} saques de no total R$ {saques_total:.2f}')
-        else:
-            print("Opção inválida.")
+        print("O Extrato é: \n")
+        print(f'O saldo atual é de: {saldo}\n')
+        print(f'Foram feitos {numero_depositos} depósitos')
+        print(f'Foram feitos {numero_saques} saques de no total R$ {saques_total:.2f}\n')
+        print(extrato)
     elif opcao == "q":
         break
     else:
